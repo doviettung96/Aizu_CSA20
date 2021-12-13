@@ -1,0 +1,32 @@
+OFILES = poisson_serial.o r8mat_rms.o \
+  rhs.o sweep.o uxxyy_exact.o u_exact.o \
+  timestamp.o
+TARGET = poisson_serial
+CC = gcc
+CFLAGS = -Wall -pedantic -std=c99 -O2
+$(TARGET): $(OFILES)
+	$(CC) $(OFILES) -lm -o $@
+
+clean:
+	rm -f $(OFILES) $(TARGET)
+
+poisson_serial.o: poisson_serial.c r8mat_rms.h \
+  rhs.h sweep.h timestamp.h u_exact.h \
+  uxxyy_exact.h
+
+r8mat_rms.o: r8mat_rms.c r8mat_rms.h
+
+
+rhs.o: rhs.c rhs.h
+
+
+sweep.o: sweep.c sweep.h
+
+
+timestamp.o: timestamp.c timestamp.h
+
+
+u_exact.o: u_exact.c u_exact.h
+
+
+uxxyy_exact.o: uxxyy_exact.c uxxyy_exact.h

@@ -1,0 +1,20 @@
+OFILES = quad_serial.o f.o \
+  cpu_time.o timestamp.o
+TARGET = quad_serial
+CC = gcc
+CFLAGS = -Wall -pedantic -std=c99 -O2
+$(TARGET): $(OFILES)
+	$(CC) $(OFILES) -lm -o $@
+
+clean:
+	rm -f $(OFILES) $(TARGET)
+
+quad_serial.o: quad_serial.c f.h \
+  cpu_time.h timestamp.h
+
+f.o: f.c f.h
+
+cpu_time.o: cpu_time.c cpu_time.h
+
+timestamp.o: timestamp.c timestamp.h
+
